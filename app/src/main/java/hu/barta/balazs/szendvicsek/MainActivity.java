@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button btn_kereses, btn_ujFelvetele;
@@ -19,9 +20,22 @@ public class MainActivity extends AppCompatActivity {
         btn_kereses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent kereses = new Intent(MainActivity.this, SearchResultActivity.class);
-                startActivity(kereses);
-                finish();
+                String arString = edit_ar.getText().toString();
+                if(arString.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Az ár mező kitöltése kötelező", Toast.LENGTH_SHORT).show();
+                }else {
+                    try {
+                        int ar = Integer.parseInt(arString);
+                        Intent kereses = new Intent(MainActivity.this, SearchResultActivity.class);
+                        kereses.putExtra("ar", ar);
+                        startActivity(kereses);
+                        finish();
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(getApplicationContext(), "Az árnak számank kell lennie!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+
             }
         });
         btn_ujFelvetele.setOnClickListener(new View.OnClickListener() {

@@ -3,10 +3,13 @@ package hu.barta.balazs.szendvicsek;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SearchResultActivity extends AppCompatActivity {
     private Button btn_vissza;
@@ -27,11 +30,31 @@ public class SearchResultActivity extends AppCompatActivity {
             }
         });
 
+
+
+        Cursor adatok = adatbazis.listaz( ar );
+        if(adatok.getCount() == 0){
+            Toast.makeText(getApplicationContext(), "Nincs az adatbázisban bejegyzés", Toast.LENGTH_SHORT).show();
+        } else {
+            StringBuilder szoveg = new StringBuilder();
+            while (adatok.moveToNext()){
+                szoveg.append("ID: ").append(adatok.getInt(0)).append(System.lineSeparator());
+                szoveg.append("Név: ").append(adatok.getString(1)).append(System.lineSeparator());
+                szoveg.append("Leírás: ").append(adatok.getString(2)).append(System.lineSeparator());
+                szoveg.append("Elkészítési Idő: ").append(adatok.getInt(3)).append(System.lineSeparator());
+                szoveg.append("Ár: ").append(adatok.getInt(4)).append(System.lineSeparator());
+                szoveg.append(System.lineSeparator());
+                szoveg.append(System.lineSeparator());
+            }
+        text_lista.setText(szoveg.toString());
+        }
+
     }
     public void init(){
         btn_vissza = findViewById(R.id.btn_vissza);
         text_lista = findViewById(R.id.text_lista);
         adatbazis = new DBHelper(this);
-        ar = Integer.parseInt(findViewById(R.id.edit_ar));
+        Intent kereses = getIntent();
+        ar = kereses.getIntExtra("ar", 0);
     }
 }

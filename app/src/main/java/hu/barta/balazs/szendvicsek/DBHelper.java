@@ -2,6 +2,7 @@ package hu.barta.balazs.szendvicsek;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -47,5 +48,12 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COL_ELKESZITES, elkeszites);
         values.put(COL_AR, ar);
         return db.insert(TABLE_NAME, null, values) != -1;
+    }
+
+    public Cursor listaz(int ar){
+        SQLiteDatabase db = this.getReadableDatabase();
+        //db.query(TABLE_NAME, new String[]{COL_ID, COL_NEV, COL_LEIRAS, COL_ELKESZITES, COL_AR},
+        //        null, null, null, null, null);
+        return db.rawQuery("SELECT * FROM "+ TABLE_NAME + " WHERE "+ COL_AR +" >= ?", new String[]{String.valueOf(ar)});
     }
 }
