@@ -17,6 +17,7 @@ public class SearchResultActivity extends AppCompatActivity {
     private TextView text_lista;
     private DBHelper adatbazis;
     private int ar;
+    private String nev;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +35,10 @@ public class SearchResultActivity extends AppCompatActivity {
         });
 
 
-
-        Cursor adatok = adatbazis.listaz( ar );
+        Cursor adatok = adatbazis.listaz( ar , nev);
         if(adatok.getCount() == 0){
             Toast.makeText(getApplicationContext(), "Nincs az adatbázisban bejegyzés", Toast.LENGTH_SHORT).show();
-            text_lista.setText("Nincs ilyen olcsó szendvics: {"+ar+"}");
+            text_lista.setText("Ilyen nevű szendvics nincs: {"+nev+"}");
         } else {
             StringBuilder szoveg = new StringBuilder();
             while (adatok.moveToNext()){
@@ -60,5 +60,6 @@ public class SearchResultActivity extends AppCompatActivity {
         adatbazis = new DBHelper(this);
         Intent kereses = getIntent();
         ar = kereses.getIntExtra("ar", 0);
+        nev = kereses.getStringExtra("nev");
     }
 }

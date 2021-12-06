@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +15,10 @@ public class InsertActivity extends AppCompatActivity {
     private EditText edit_nev, edit_leiras, edit_ido, edit_ar;
     private Button btn_felvetel, btn_vissza;
     private DBHelper adatbazis;
+    private String nev;
+    private String leiras;
+    private String idoString;
+    private String arString;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,13 +32,17 @@ public class InsertActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        edit_nev.addTextChangedListener(textWatcher);
+        edit_leiras.addTextChangedListener(textWatcher);
+        edit_ido.addTextChangedListener(textWatcher);
+        edit_ar.addTextChangedListener(textWatcher);
+
+
+
         btn_felvetel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String nev = edit_nev.getText().toString().trim();
-                String leiras = edit_leiras.getText().toString().trim();
-                String idoString = edit_ido.getText().toString().trim();
-                String arString = edit_ar.getText().toString().trim();
                 if(nev.isEmpty() || leiras.isEmpty() || idoString.isEmpty() || arString.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Minden mező kitöltése kötelező", Toast.LENGTH_SHORT).show();
                 } else {
@@ -64,5 +74,27 @@ public class InsertActivity extends AppCompatActivity {
         btn_vissza = findViewById(R.id.btn_vissza);
         btn_felvetel = findViewById(R.id.btn_felvetel);
         adatbazis = new DBHelper(this);
+
     }
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            nev = edit_nev.getText().toString().trim();
+            leiras = edit_leiras.getText().toString().trim();
+            idoString = edit_ido.getText().toString().trim();
+            arString = edit_ar.getText().toString().trim();
+            btn_felvetel.setEnabled(!nev.isEmpty() && !leiras.isEmpty() && !idoString.isEmpty() && !arString.isEmpty());
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
+    };
 }

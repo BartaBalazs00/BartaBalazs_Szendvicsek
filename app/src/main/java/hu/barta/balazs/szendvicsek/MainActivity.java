@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button btn_kereses, btn_ujFelvetele;
-    private EditText edit_ar;
+    private EditText edit_ar, edit_nev;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +26,10 @@ public class MainActivity extends AppCompatActivity {
                 }else {
                     try {
                         int ar = Integer.parseInt(arString);
+                        String nev = edit_nev.getText().toString();
                         Intent kereses = new Intent(MainActivity.this, SearchResultActivity.class);
                         kereses.putExtra("ar", ar);
+                        kereses.putExtra("nev", nev);
                         startActivity(kereses);
                         finish();
                     } catch (NumberFormatException e) {
@@ -51,5 +53,6 @@ public class MainActivity extends AppCompatActivity {
         btn_kereses = findViewById(R.id.btn_kereses);
         btn_ujFelvetele = findViewById(R.id.btn_ujFelvetele);
         edit_ar = findViewById(R.id.edit_ar);
+        edit_nev = findViewById(R.id.edit_nev);
     }
 }

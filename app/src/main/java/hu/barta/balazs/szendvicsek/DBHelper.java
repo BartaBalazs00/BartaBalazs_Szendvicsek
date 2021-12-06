@@ -50,10 +50,10 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.insert(TABLE_NAME, null, values) != -1;
     }
 
-    public Cursor listaz(int ar){
+    public Cursor listaz(int ar, String nev){
         SQLiteDatabase db = this.getReadableDatabase();
         //db.query(TABLE_NAME, new String[]{COL_ID, COL_NEV, COL_LEIRAS, COL_ELKESZITES, COL_AR},
         //        null, null, null, null, null);
-        return db.rawQuery("SELECT * FROM "+ TABLE_NAME + " WHERE "+ COL_AR +" <= ?", new String[]{String.valueOf(ar)});
+        return db.rawQuery("SELECT * FROM "+ TABLE_NAME + " WHERE "+ COL_AR +" <= ? AND "+COL_NEV+" like ?", new String[]{String.valueOf(ar), "%"+nev+"%"});
     }
 }

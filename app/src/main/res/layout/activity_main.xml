@@ -11,6 +11,13 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Keresés"
+        android:id="@+id/edit_nev"
+        android:textSize="25sp"
+        android:gravity="center"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="Ár"
         android:id="@+id/edit_ar"
         android:textSize="25sp"

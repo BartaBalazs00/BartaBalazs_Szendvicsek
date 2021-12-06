@@ -46,6 +46,7 @@
         android:layout_height="wrap_content"
         android:text="Felvétel"
         android:id="@+id/btn_felvetel"
+        android:enabled="false"
         android:textSize="25sp"
         />
     <Button
