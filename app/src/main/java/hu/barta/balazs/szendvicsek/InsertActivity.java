@@ -11,6 +11,7 @@ import android.widget.EditText;
 public class InsertActivity extends AppCompatActivity {
     private EditText edit_nev, edit_leiras, edit_ido, edit_ar;
     private Button btn_felvetel, btn_vissza;
+    private DBHelper adatbazis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,5 +33,6 @@ public class InsertActivity extends AppCompatActivity {
         edit_ar = findViewById(R.id.edit_ar);
         btn_vissza = findViewById(R.id.btn_vissza);
         btn_felvetel = findViewById(R.id.btn_felvetel);
+        adatbazis = new DBHelper(this);
     }
 }
