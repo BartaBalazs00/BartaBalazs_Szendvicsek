@@ -14,6 +14,7 @@
         android:hint="Ár"
         android:id="@+id/edit_ar"
         android:textSize="25sp"
+        android:inputType="number"
         android:gravity="center"/>
     <Button
         android:layout_width="match_parent"

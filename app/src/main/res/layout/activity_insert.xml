@@ -30,6 +30,7 @@
         android:gravity="center"
         android:id="@+id/edit_ido"
         android:textSize="25sp"
+        android:inputType="number"
         />
     <EditText
         android:layout_width="match_parent"
@@ -38,6 +39,7 @@
         android:gravity="center"
         android:id="@+id/edit_ar"
         android:textSize="25sp"
+        android:inputType="number"
         />
     <Button
         android:layout_width="match_parent"

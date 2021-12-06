@@ -11,6 +11,8 @@ import android.widget.TextView;
 public class SearchResultActivity extends AppCompatActivity {
     private Button btn_vissza;
     private TextView text_lista;
+    private DBHelper adatbazis;
+    private int ar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,9 +26,12 @@ public class SearchResultActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
     public void init(){
         btn_vissza = findViewById(R.id.btn_vissza);
         text_lista = findViewById(R.id.text_lista);
+        adatbazis = new DBHelper(this);
+        ar = Integer.parseInt(findViewById(R.id.edit_ar));
     }
 }
