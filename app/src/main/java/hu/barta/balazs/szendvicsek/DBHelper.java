@@ -54,6 +54,6 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         //db.query(TABLE_NAME, new String[]{COL_ID, COL_NEV, COL_LEIRAS, COL_ELKESZITES, COL_AR},
         //        null, null, null, null, null);
-        return db.rawQuery("SELECT * FROM "+ TABLE_NAME + " WHERE "+ COL_AR +" >= ?", new String[]{String.valueOf(ar)});
+        return db.rawQuery("SELECT * FROM "+ TABLE_NAME + " WHERE "+ COL_AR +" <= ?", new String[]{String.valueOf(ar)});
     }
 }

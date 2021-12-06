@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +22,8 @@ public class SearchResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
         init();
+
+        text_lista.setMovementMethod(new ScrollingMovementMethod());
         btn_vissza.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,6 +38,7 @@ public class SearchResultActivity extends AppCompatActivity {
         Cursor adatok = adatbazis.listaz( ar );
         if(adatok.getCount() == 0){
             Toast.makeText(getApplicationContext(), "Nincs az adatbázisban bejegyzés", Toast.LENGTH_SHORT).show();
+            text_lista.setText("Nincs ilyen olcsó szendvics: {"+ar+"}");
         } else {
             StringBuilder szoveg = new StringBuilder();
             while (adatok.moveToNext()){
